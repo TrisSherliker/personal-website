@@ -1,6 +1,6 @@
 ---
-title: When was a webpage published?
-subtitle: A bit of metadata that helps
+title: When was a webpage modified?
+subtitle: Looking for last-modified data which is sometimes present
 date: 2026-05-02
 tags: [web, research, tools, evidence, prior art]
 ---

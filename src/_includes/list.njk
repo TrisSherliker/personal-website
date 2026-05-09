@@ -10,8 +10,8 @@
 <ul>
 {%- for item in items %}
   <li>
-  <a href="{{ item.url | url }}">{{ item.data.title | markdownInline | safe }}</a> — <small>{{ item.date.toDateString() }}</small>
-  {%- if item.data.subtitle -%}<br/>{{ item.data.subtitle | markdownInline | safe }}{% endif -%}
+  <a href="{{ item.url | url }}">{{ item.data.title | markdownInline | safe }}</a> — <small>{{ item.date | readableDate }}</small>
+  {%- if item.data.subtitle -%}<br/><em style="font-size: 0.9em;">{{ item.data.subtitle | markdownInline | safe }}</em>{% endif -%}
   </li>
 {%- endfor %}
 </ul>

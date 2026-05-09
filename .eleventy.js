@@ -11,6 +11,11 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addFilter("search", searchFilter);
     eleventyConfig.addFilter("linkToHead", linkToHead);
+    eleventyConfig.addFilter("readableDate", (dateObj) => {
+        const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        return `${days[dateObj.getUTCDay()]} ${dateObj.getUTCDate()} ${months[dateObj.getUTCMonth()]} ${dateObj.getUTCFullYear()}`;
+    });
 
 		// Asset Watch Targets
 		eleventyConfig.addWatchTarget('./src/assets')
