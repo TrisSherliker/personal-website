@@ -13,3 +13,51 @@
   background: none;
   background-repeat: no-repeat;
 }
+
+nav.site-nav {
+  font-size: 1.1rem;
+  padding: 1.5rem 0 0.5rem 0;
+  width: 55%;
+  max-width: 720px;
+}
+
+@media (max-width: 760px) {
+  nav.site-nav {
+    width: 90%;
+  }
+}
+
+nav.site-nav a {
+  margin-right: 1.5rem;
+  color: #555;
+  text-decoration: none;
+  background: none;
+}
+
+nav.site-nav a:hover {
+  color: #111;
+}
+
+nav.site-nav a.active {
+  color: #111;
+  border-bottom: 1px solid #111;
+}
+
+.post-date {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+article { padding-top: 1.5rem; }
+section { padding-top: 0; }
+h1 { margin-top: 0; }
+h2 { margin-top: 1.2rem; }
+h3 { margin-top: 1rem; }
+
+blockquote > p { margin-bottom: 0.2rem; }
+blockquote > footer { margin-top: 0; }
+
+div.epigraph { margin: 1em 0 2em 0; }
+div.epigraph > blockquote { margin-bottom: 0; padding-bottom: 0; }
+div.epigraph > blockquote > p { margin-bottom: 0; }
+div.epigraph > blockquote > footer { margin-top: 0; text-align: right; font-style: normal; }

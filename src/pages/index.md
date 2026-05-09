@@ -1,15 +1,20 @@
 ---
-title: Eleventufte
-subtitle: A Tufte-flavored starter kit for the Eleventy static site generator
+title: Tris Sherliker
+subtitle: IP, technology & commercial law
 permalink: "/"
 ---
 
-[^{-} Who wants marginalia? You want marginalia. Admit it.]
+[^ {-} Barrister. Views entirely my own.]
 
-A quick-start template that combines the front-end styling of [tufte-css](https://github.com/edwardtufte/tufte-css), the custom parser of [tufte-markdown](https://github.com/luhmann/tufte-markdown), and the flexibility of [Eleventy](https://11ty.dev) in the style of [Edward Tufte's much-loved books](https://www.edwardtufte.com/tufte/).
+<span class="newthought">I am a lawyer</span> practising in intellectual property, technology, and commercial law. My work spans copyright, trade marks, data protection, software licensing, and the increasingly contested terrain where technology meets legal doctrine.
 
-The [Features page](features/) gives a more thorough run-down of the Markdown enhancements it offers. If you're interested in cloning and using it yourself, [head on over to Github](https://github.com/nerdhaus/eleventufte)…
+This site is where I think out loud — about cases, statutes, policy, and the texture of legal practice. It is not legal advice.
 
-## Recent posts…
+## Recent writing
+
 {%- import "list.njk" as list -%}
 {{ list.details(collections.posts) }}
+
+---
+
+[Browse the full [archive](/blog/), read more [about me](/about/), or [search](/search/) the site.]

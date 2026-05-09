@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="{{ meta.lang }}">
   <head>
-		{% include "head.njk" %}
+    {% include "head.njk" %}
   </head>
   <body>
-		<article>
-		<h1>{{ title | markdownInline | safe }}</h1>
-		{% if subtitle %}<p class="subtitle">{{ subtitle | markdownInline | safe }}</p>{% endif %}
-				{{ content | safe }}
-		</article>
-		{% include "footer.njk" %}
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/search">Search</a>
+    </nav>
+    <article>
+      <h1>{{ title | markdownInline | safe }}</h1>
+      {% if subtitle %}<p class="subtitle">{{ subtitle | markdownInline | safe }}</p>{% endif %}
+      {{ content | safe }}
+    </article>
+    {% include "footer.njk" %}
   </body>
 </html>
