@@ -7,7 +7,7 @@ tags: [web, research, tools, evidence, prior art]
 
 <span class="newthought">Working out the date</span> of a web page can be useful (especially for prior art in patent cases, and for evidence in litigation), but  it can also be difficult. Most of the time a useful page has a date on it of some kind which may be reliable. For others the [Wayback Machine](https://archive.org) helps perhaps about half the time but it hasn't got perfect coverage. There's another tool that can sometimes[^static] help fill the gap.
 
-[^static: This is mainly directed to static web content, i.e. content stored as files on a server. A lot of web content is generated dynamically and isn't stored as files in the same way.]
+[^static]: This is mainly directed to static web content, i.e. content stored as files on a server. A lot of web content is generated dynamically and isn't stored as files in the same way.
 
 ## The Last-Modified header
 
