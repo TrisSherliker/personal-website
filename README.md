@@ -1,3 +1,3 @@
-# Sherliker.net
+# tris.sherliker.net
 
-Eleven with theme ElevenTufte
+Repo for the website at tris.sherliker.net. Built by Eleventy with theme ElevenTufte.
