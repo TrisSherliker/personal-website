@@ -1,6 +1,6 @@
 ---
 title: Vibecoding a simple feature with Claude
-subtitle: It went pretty well
+subtitle: Apparently I'm neurotic about backend code
 date: 2026-05-09
 tags: [Claude, LLM, BunTool]
 ---
@@ -13,13 +13,13 @@ tags: [Claude, LLM, BunTool]
 
 ## Framework
 
-Also a good chance to test a new (to me) `claude.md` variant. I heard from a friend today that [Forrest Chang's Karpathy-Inspired Claude Code Guidelines](https://github.com/forrestchang/andrej-karpathy-skills) was useful[^forrest], so installed it as a plugin before I got started. This was pretty easy using claude's inline plugin management commands.
+Also a good chance to test a new (to me) `claude.md` variant. I heard from a friend today that [Forrest Chang's Karpathy-Inspired Claude Code Guidelines](https://github.com/forrestchang/andrej-karpathy-skills) was useful[^forrest], so I installed it as a plugin before I got started. This was pretty easy using claude's inline plugin management commands.
 
 [^forrest]: Described as _"A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."_ I've used Claude enough in the past that I think I'll be able to spot differences, though this is a slightly different exercise.
 
 ## Specifying
 
-I decided to work from a markdown checklist and iterate through the steps one by one, so started by planning out my spec for the feature: 
+I decided to work from a markdown checklist and iterate through the steps one by one, so I started by planning out my spec for the feature: 
 
 ```
 # Adding coversheet checklist
@@ -59,11 +59,11 @@ And so it proceeded.
 <span class="newthought">Overall it went very well.</span> There were a few nits and irritations though:
 
 - Claude often used variable names which were fine in isolation but which were confusing in their overall context. For example `coversheetFile` and `coversheetPDF` were two different but closely connected things, one derived from the other, both the same type. I much preferred names that conveyed the functions - `coversheetFile` and `validatedCoversheet`. It would have been annoying to come back to maintain the confusing variables in future. 
-- Without Forrest Chang's plugin Claude just loved haphazardly deleting my comments. I'm sure that some people would do the same, but I put them there for a reason! I found the plugin helped with this, suppressing unwanted edits.
+- Without Forrest Chang's plugin, Claude just loved haphazardly deleting my comments. I'm sure that some people would do the same, but I put them there for a reason! I found the plugin helped with this, suppressing unwanted edits.
 - Although it had no respect for my comments, it seemed to find the logging prints unassailable. They count up stepwise in the main pipeline ("step 4/11" etc), so a `sed` call or two was needed to update them globally as new pipeline steps were added.[^sed]
 - In some cases it got the logical flow of steps out of order. That's fine, this is why I monitor and could correct it. Somewhat sassily it reacted to that by amending my spec to hyperclarify... even after the edit was finished!
 
-So I ended up being quite hands-on and I couldn't surrender control entirely. Having said that, if I were using Claude for maintaining a lot of this wouldn't matter a jot.
+So I ended up being quite hands-on and I couldn't surrender control entirely. Having said that, if I weren't using Claude for maintaining my own stuff a lot of this wouldn't matter a jot.
 
 <figure><img src="/assets/claude-check.png" alt="I let the LLM have the satisfaction of checking things off its list, and it took the opportunity for some sassy backchat."><figcaption>I let the LLM have the satisfaction of checking things off its list, and it took the opportunity for some sassy backchat.</figcaption></figure>
 
@@ -76,4 +76,6 @@ So I ended up being quite hands-on and I couldn't surrender control entirely. Ha
 
 ## Overall?
 
-But I didn't get the most out of it because I'm apparently very stuffy about edits to my own handcoded work. It wasn't quite as smooth as I hoped, but that was partly because I was so opinionated about how things should look that I tended to want to micromanage the result anyway. In the frontend I'm perfectly happy to deploy UI features via Claude.
+But I didn't get the most out of it because I'm apparently very stuffy about edits to my own handcoded work. It wasn't quite as smooth as I hoped, but that was partly because I was so opinionated about how things should look that I tended to want to micromanage the result anyway. 
+
+In the frontend I'm perfectly happy to deploy UI features via Claude, and I went on to depend on it for an autosave feature which worked entirely in frontend. I suppose the different level of caution is appropriate. 
