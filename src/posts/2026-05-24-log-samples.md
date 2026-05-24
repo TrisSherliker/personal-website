@@ -9,7 +9,7 @@ I say on its Privacy page and homepage that [BunTool](https://buntool.co.uk) doe
 
 There is _some_ logging though, and I recently posted about this on LinkedIn: 
 
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7463327320574054402?collapsed=1" height="669" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+![buntool-logs.png]
 
 As you see, it's technical logging only without any personal info. Having posted that I realised people might like to know exactly what is logged, so here are some examples of some real-life logs from the last few days, chosen at random (and slightly prettified for ease of display in a news post):
 
