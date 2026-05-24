@@ -1,6 +1,6 @@
 ---
 title: Blog
-subtitle: Writing on law, technology, and where they meet
+subtitle: 
 permalink: /blog/
 ---
 

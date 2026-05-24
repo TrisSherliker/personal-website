@@ -37,7 +37,7 @@ To view in Chrome:
 
 Here's an example for http://landley.net/history/mirror/collate/aa080499b.htm, which shows that the page was `last-modified Tue, 28 May 2002 18:51:09 GMT`
 
-![lastmod-0.png]
+![metadata screenshot](https://tris.sherliker.net/assets/lastmod-0.png)
 
 
 ## The Wayback Machine
