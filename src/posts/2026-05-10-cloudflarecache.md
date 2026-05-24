@@ -5,6 +5,13 @@ date: 2026-05-10
 tags: [lawtech]
 ---
 
+<div class="epigraph">
+<blockquote>
+<p>There are only two hard things in Computer Science: cache invalidation and naming things.</p>
+<footer>Phil Karlton</footer>
+</blockquote>
+</div>
+
 <span class="newthought">I spent most of today</span> debugging a senseless
 error.
 
