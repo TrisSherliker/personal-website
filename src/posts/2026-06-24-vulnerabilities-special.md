@@ -44,5 +44,5 @@ I say this last thought is a bit more practical than philosophical, because it d
 
 Probably not really.
 
-But I do think phiolosophically, the choices that a stranger makes - first to invest time and tokens into finding a vulnerability, and second to disclose it responsibly, are still a special kind of positive interaction, irrespective of the tools used. 
+But I do think philosophically, the choices that a stranger makes - first to invest time and tokens into finding a vulnerability, and second to disclose it responsibly, are still a special kind of positive interaction, irrespective of the tools used. 
 
