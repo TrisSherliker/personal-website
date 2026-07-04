@@ -6,7 +6,7 @@ date: 2026-05-30
 
 I was using Claude to set up dotfile syncing before provisioning a new machine, and during the session I got this: 
 
-<figure><img src="/assets/2026-05-30-computer-accidents.png"><figcaption>Whoops, just press escape and move on. Nothing to see here.</figcaption></figure>
+<figure><img src="https://tris.sherliker.net/assets/2026-05-30-computer-accidents.png"><figcaption>Whoops, just press escape and move on. Nothing to see here.</figcaption></figure>
 
 ```
 > Updated plan
