@@ -13,6 +13,7 @@ permalink: /media/
   <h3><a href="https://hackaday.com/2026/06/24/floss-weekly-episode-872-im-not-satoshi/" target="_blank" rel="noopener">FLOSS Weekly Episode 872: I’m Not Satoshi</a></h3>
   <p class="media-description">I joined Jonathan Bennett for his long-running podcase FLOSS Weekly via Hackaday, to chat about some open source legal disputes I've been involved in - and one in particular.</p>
 </div>
+
 <div class="media-item">
   <a href="https://www.rollonfriday.com/news-content/2birds-solicitor-builds-free-tool-cure-bundling-headaches" target="_blank" rel="noopener">
     <img class="media-thumbnail" src="/assets/media/rollonfriday.png" alt="Roll on Friday">
