@@ -15,4 +15,4 @@ Plan: Exit accidental plan mode
 Plan mode was triggered accidentally mid-conversation. No implementation task is being planned. Simply exit plan mode and continue the planning session with the user.
 ```
 
-This is a very human sort of 'accident'. The idea of software doing something relatably and accidentally in 2026 is pretty striking. A few years ago this would have been fiction. 
+This is a very human sort of "accident". The idea of software doing something relatably and accidentally in 2026 is pretty striking. A few years ago this would have been fiction. 
