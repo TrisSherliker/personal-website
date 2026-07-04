@@ -6,7 +6,7 @@ date: 2026-05-30
 
 I was using Claude to set up dotfile syncing before provisioning a new machine, and during the session I got this: 
 
-[!Whoops, nothing to see here](https://tris.sherliker.net/assets/2026-05-30-computer-accidents.png)
+![Whoops, nothing to see here](https://tris.sherliker.net/assets/2026-05-30-computer-accidents.png)
 
 
 ```
