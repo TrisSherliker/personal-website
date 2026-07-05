@@ -70,4 +70,28 @@ blockquote > footer { margin-top: 0; }
 div.epigraph { margin: 1em 0 2em 0; }
 div.epigraph > blockquote { margin-bottom: 0; padding-bottom: 0; }
 div.epigraph > blockquote > p { margin-bottom: 0; }
+
+/* On mobile, Tufte hides sidenotes until you tap the number. Make that
+   number look tappable rather than like a plain footnote marker. */
+@media (max-width: 760px) {
+  label.sidenote-number { cursor: pointer; }
+  label.sidenote-number:after {
+    content: counter(sidenote-counter);
+    color: #a00000;
+    font-weight: bold;
+    border: 1px solid currentColor;
+    border-radius: 1em;
+    padding: 0.05em 0.45em;
+    margin-left: 0.1em;
+    font-size: 0.75rem;
+    top: -0.35rem;
+    line-height: 1;
+  }
+  /* Reveal is more obviously "the thing you just opened" */
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
+    border-left: 2px solid #a00000;
+    padding-left: 0.8rem;
+  }
+}
 div.epigraph > blockquote > footer { margin-top: 0; text-align: right; font-style: normal; }
