@@ -1,6 +1,5 @@
 ---
 title: Tris Sherliker
-subtitle: IP, tech, other interests
 permalink: "/"
 ---
 
@@ -8,7 +7,7 @@ permalink: "/"
 
 I also publish and maintain [BunTool](https://buntool.co.uk), a free and open-source tool (without tracking, cookies, or any kind of data harvesting) for people to organise their papers for court and other legal settings. BunTool is a used by unrepresented people who need to go to court, by charities, and also quite widely by solicitors, barristers, mediators and some even judges.
 
-You can also find me on [GitHub](https://github.com/TrisSherliker), [LinkedIn](https://linkedin.com/in/sherliker), or [email me](tris@sherliker.net). This is entirely a personal page and unconnected to my work as a partner in Bird & Bird's IP team, and plainly is not legal advice. If you're interested in my professional work or looking for legal advice you won't find it here -- please go to [Bird & Bird](https://www.twobirds.com/en/people/t/tristan-sherliker).
+You can also find me on [GitHub](https://github.com/TrisSherliker), [LinkedIn](https://linkedin.com/in/sherliker), or [email me](tris@sherliker.net). This is entirely a personal page and unconnected to my work as a partner in Bird & Bird's IP team. If you're interested in my professional work or looking for legal advice you won't find it here -- please go to [Bird & Bird](https://www.twobirds.com/en/people/t/tristan-sherliker).
 
 ## Recent Posts
 

@@ -1,0 +1,206 @@
+---
+permalink: /feather-tuner/index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Feather tuner</title>
+<script>window.__FEATHERS__ = {{ feathers | dump | safe }};</script>
+<style>
+  html { font-size: 15px; }
+  body {
+    font-family: Palatino, "Palatino Linotype", Georgia, serif;
+    background: #fffff8; color: #111;
+    max-width: 1400px; margin: 0 auto; padding: 2rem 360px 6rem 12.5%;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  h1 { font-weight: 400; font-size: 3.2rem; margin: 3rem 0 1.5rem; position: relative; max-width: 55%; }
+  h2 { font-style: italic; font-weight: 400; font-size: 2.2rem; margin: 3rem 0 1.4rem; position: relative; max-width: 55%; }
+  p  { font-size: 1.4rem; line-height: 2rem; width: 55%; }
+  .heading-feather { position: absolute; top: 50%; transform-origin: left center; pointer-events: none; }
+  .col-guide { position: fixed; top: 0; bottom: 0; width: 0; border-right: 1px dashed #cdb; pointer-events: none; }
+
+  .panel {
+    position: fixed; top: 0; right: 0; width: 320px; height: 100vh;
+    background: #1b1b1b; color: #eee; padding: 1rem 1.2rem; overflow-y: auto;
+    font-family: system-ui, sans-serif; font-size: 13px; box-sizing: border-box;
+    box-shadow: -4px 0 18px rgba(0,0,0,.25);
+  }
+  .panel h3 { font-family: inherit; font-style: normal; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9ad; margin: 1.2rem 0 .4rem; }
+  .panel h3:first-child { margin-top: 0; }
+  .row { margin: .4rem 0; display: flex; align-items: center; gap: .5rem; }
+  .row label { flex: 0 0 60px; color: #bbb; }
+  .row input[type=range] { flex: 1; }
+  .row output { flex: 0 0 56px; text-align: right; font-variant-numeric: tabular-nums; }
+  select, button { font: inherit; padding: .3rem .4rem; background: #333; color: #eee; border: 1px solid #555; border-radius: 4px; }
+  button { cursor: pointer; }
+  button:hover { background: #444; }
+  button.primary { background: #2a4; border-color: #3b5; }
+  .bucketbar button { flex: 1; }
+  .bucketbar button.on { background: #a63; border-color: #c85; color: #fff; }
+  .accepted { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+  .chip { background: #2a3a4a; border: 1px solid #46617c; border-radius: 12px; padding: .15rem .5rem; cursor: pointer; }
+  .chip:hover { background: #a33; border-color: #c55; }
+  pre { background: #000; color: #6f6; padding: .6rem; border-radius: 4px; white-space: pre-wrap; word-break: break-all; font-size: 11.5px; }
+  .hint { color: #888; font-size: 11px; margin: .2rem 0 0; }
+</style>
+</head>
+<body>
+  <div class="col-guide" id="guide"></div>
+
+  <h1 id="h1">The Larger Heading</h1>
+  <p>The dashed line marks the 55% body-text column. Feathers are anchored to the right of both the heading text and that line, so they should never cover this paragraph or the heading. Reroll to sanity-check across random picks.</p>
+
+  <h2 id="h2">Is that a shebang?</h2>
+  <p>A short heading — the feather sits out in the right gutter. Watch that consecutive feathers never repeat an angle.</p>
+
+  <h2 id="h3">OCR was cumbersome — a deliberately long section heading</h2>
+  <p>A long heading pushes the feather rightward; it trails the text directly here.</p>
+
+  <div class="panel">
+    <h3>Editing bucket</h3>
+    <div class="row bucketbar">
+      <button data-bucket="small">small</button>
+      <button data-bucket="medium">medium</button>
+      <button data-bucket="large">large</button>
+    </div>
+    <div id="bucketfiles" class="hint"></div>
+
+    <h3>Angles for this bucket</h3>
+    <div class="row"><label>Angle</label><input type="range" id="angle" min="-180" max="180" value="88"><output id="angleO">88</output></div>
+    <div class="row"><button id="accept" class="primary">✓ Add angle</button><button id="preview">Preview this angle</button></div>
+    <div class="accepted" id="angles"></div>
+    <p class="hint">Click a chip to remove it.</p>
+
+    <h3>Size range for this bucket (rem, longest side)</h3>
+    <div class="row"><label>Min</label><input type="range" id="min" min="4" max="40" step="0.5"><output id="minO"></output></div>
+    <div class="row"><label>Max</label><input type="range" id="max" min="4" max="40" step="0.5"><output id="maxO"></output></div>
+
+    <h3>Preview</h3>
+    <div class="row"><label>Flip</label><input type="checkbox" id="flip"><button id="reroll" class="primary" style="margin-left:auto">↻ Reroll</button></div>
+
+    <h3>Config to keep</h3>
+    <pre id="out"></pre>
+  </div>
+
+<script>
+const GROUPS = window.__FEATHERS__ || { small: [], medium: [], large: [] };
+const $ = s => document.querySelector(s);
+
+const config = {
+  small:  { angles: [75, 80, 85, 90, 95, 100, 105], size: [10.8, 15.3] },
+  medium: { angles: [75, 80, 85, 90, 95, 100, 105], size: [10.8, 15.3] },
+  large:  { angles: [75, 80, 85, 90, 95, 100, 105], size: [16.2, 22.05] }
+};
+let bucket = 'medium';
+let forceAngle = null; // when previewing a specific angle
+const headings = ['#h1', '#h2', '#h3'].map(id => $(id));
+const ROOT_REM = parseFloat(getComputedStyle(document.documentElement).fontSize) || 15;
+const MIN_GAP_REM = 1, RAND_GAP_REM = 2.5, GUTTER_GAP_REM = 0.75, SAFETY_REM = 0.4;
+
+const rand = a => a[Math.floor(Math.random() * a.length)];
+const randRange = (a, b) => a + Math.random() * (b - a);
+
+function makeFeather(h) {
+  if (!h.querySelector('.heading-feather-text')) {
+    const span = document.createElement('span');
+    span.className = 'heading-feather-text';
+    while (h.firstChild) span.appendChild(h.firstChild);
+    h.appendChild(span);
+  }
+  let img = h.querySelector('.heading-feather');
+  if (!img) { img = document.createElement('img'); img.className = 'heading-feather'; h.appendChild(img); }
+  return img;
+}
+function anchor(h, img) {
+  const text = h.querySelector('.heading-feather-text');
+  const len = parseFloat(img.dataset.len) * ROOT_REM;
+  const angle = parseFloat(img.dataset.angle) * Math.PI / 180;
+  const gap = parseFloat(img.dataset.gap);
+  let left = text.offsetLeft + text.offsetWidth + gap;
+  const nW = img.naturalWidth, nH = img.naturalHeight;
+  if (nW && nH) {
+    let w, h;
+    if (nW >= nH) { w = len; h = len * nH / nW; } else { h = len; w = len * nW / nH; }
+    const bboxH = Math.abs(w * Math.sin(angle)) + Math.abs(h * Math.cos(angle));
+    const cs = getComputedStyle(h);
+    const margin = Math.min(parseFloat(cs.marginTop), parseFloat(cs.marginBottom));
+    const allowedH = h.offsetHeight + 2 * (margin - SAFETY_REM * ROOT_REM);
+    if (bboxH > allowedH) left = Math.max(left, h.clientWidth + GUTTER_GAP_REM * ROOT_REM);
+  }
+  img.style.left = left + 'px';
+}
+
+let recent = [];
+function pickAngle() {
+  if (forceAngle !== null) return forceAngle;
+  let choices = config[bucket].angles.filter(a => recent.indexOf(a) === -1);
+  if (!choices.length) choices = config[bucket].angles;
+  const a = rand(choices);
+  recent.push(a); if (recent.length > 2) recent.shift();
+  return a;
+}
+
+function render() {
+  const files = GROUPS[bucket] || [];
+  recent = [];
+  headings.forEach(h => {
+    const img = makeFeather(h);
+    if (!files.length) { img.style.display = 'none'; return; }
+    img.style.display = '';
+    const lenNum = randRange(config[bucket].size[0], config[bucket].size[1]);
+    const a = pickAngle();
+    img.dataset.len = lenNum.toFixed(2);
+    img.dataset.angle = a;
+    img.dataset.gap = ((MIN_GAP_REM + Math.random() * RAND_GAP_REM) * ROOT_REM).toFixed(1);
+    img.style.maxWidth = lenNum.toFixed(2) + 'rem'; img.style.maxHeight = lenNum.toFixed(2) + 'rem';
+    img.style.width = 'auto'; img.style.height = 'auto';
+    img.style.transform = 'translateY(-50%) rotate(' + a + 'deg)';
+    img.src = rand(files);
+    img.onload = () => anchor(h, img);
+    anchor(h, img);
+  });
+  syncPanel();
+}
+
+function syncPanel() {
+  document.querySelectorAll('.bucketbar button').forEach(b => b.classList.toggle('on', b.dataset.bucket === bucket));
+  $('#bucketfiles').textContent = (GROUPS[bucket] || []).map(f => f.split('/').pop()).join(', ') || '(no files in this bucket)';
+  $('#min').value = config[bucket].size[0]; $('#minO').textContent = config[bucket].size[0] + 'rem';
+  $('#max').value = config[bucket].size[1]; $('#maxO').textContent = config[bucket].size[1] + 'rem';
+  const c = $('#angles'); c.innerHTML = '';
+  config[bucket].angles.slice().sort((a,b)=>a-b).forEach(a => {
+    const el = document.createElement('span');
+    el.className = 'chip'; el.textContent = a + '°';
+    el.onclick = () => { config[bucket].angles = config[bucket].angles.filter(x => x !== a); render(); };
+    c.appendChild(el);
+  });
+  renderOut();
+}
+function renderOut() {
+  const line = k => "  " + (k + ':').padEnd(8) +
+    "{ angles: [" + config[k].angles.slice().sort((a,b)=>a-b).join(', ') +
+    "], size: [" + config[k].size[0] + ", " + config[k].size[1] + "] }";
+  $('#out').textContent = "CONFIG = {\n" + ['small','medium','large'].map(line).join(',\n') + "\n};";
+}
+
+document.querySelectorAll('.bucketbar button').forEach(b => {
+  b.onclick = () => { bucket = b.dataset.bucket; forceAngle = null; render(); };
+});
+$('#angle').oninput = e => { forceAngle = +e.target.value; $('#angleO').textContent = e.target.value; render(); };
+$('#preview').onclick = () => { forceAngle = +$('#angle').value; render(); };
+$('#accept').onclick = () => { const a = +$('#angle').value; if (!config[bucket].angles.includes(a)) config[bucket].angles.push(a); forceAngle = null; render(); };
+$('#min').oninput = e => { config[bucket].size[0] = +e.target.value; $('#minO').textContent = e.target.value + 'rem'; forceAngle = null; render(); };
+$('#max').oninput = e => { config[bucket].size[1] = +e.target.value; $('#maxO').textContent = e.target.value + 'rem'; forceAngle = null; render(); };
+$('#flip').onchange = () => render();
+$('#reroll').onclick = () => { forceAngle = null; render(); };
+
+function placeGuide() { $('#guide').style.left = (headings[0].getBoundingClientRect().left + headings[0].clientWidth) + 'px'; }
+window.addEventListener('resize', () => { placeGuide(); render(); });
+window.addEventListener('load', () => { placeGuide(); render(); });
+placeGuide(); render();
+</script>
+</body>
+</html>

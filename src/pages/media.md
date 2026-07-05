@@ -9,7 +9,7 @@ permalink: /media/
   <a href="https://hackaday.com/2026/06/24/floss-weekly-episode-872-im-not-satoshi/" target="_blank" rel="noopener">
     <img class="media-thumbnail" src="/assets/media/floss-weekly.png" alt="FLOSS Weekly Hackaday">
   </a>
-  <div class="media-meta">Roll on Friday &middot; 24 June 2026</div>
+  <div class="media-meta">Hackaday &middot; 24 June 2026</div>
   <h3><a href="https://hackaday.com/2026/06/24/floss-weekly-episode-872-im-not-satoshi/" target="_blank" rel="noopener">FLOSS Weekly Episode 872: I’m Not Satoshi</a></h3>
   <p class="media-description">I joined Jonathan Bennett for his long-running podcase FLOSS Weekly via Hackaday, to chat about some open source legal disputes I've been involved in - and one in particular.</p>
 </div>

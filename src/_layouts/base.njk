@@ -5,10 +5,13 @@
   </head>
   <body>
     <nav class="site-nav">
-      <a href="/">Home</a>
-      <a href="/media">Media</a>
-      <a href="/blog">Blog</a>
-      <a href="/search">Search</a>
+      <a class="nav-logo" href="/"><img src="/assets/name.png" alt="Tris Sherliker"></a>
+      <span class="nav-links">
+        <a href="/">Home</a>
+        <a href="/media">Media</a>
+        <a href="/blog">Blog</a>
+        <a href="/search">Search</a>
+      </span>
     </nav>
     <article>
       <h1>{{ title | markdownInline | safe }}</h1>
