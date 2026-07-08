@@ -13,7 +13,7 @@
 
   // ---- Tunable config ------------------------------------------------------
   var CONFIG = {
-    small:  { size: [10.8, 15.3] },
+    small:  { size: [6.75, 8.55] },
     medium: { size: [10.8, 15.3] },
     large:  { size: [16.2, 22.05] }
   };
@@ -37,9 +37,15 @@
   var recentSrc = [];
   var builtMode = null;
 
+  var XL = 1200;         // px: wide enough for a third left-margin feather
+  var NON_BLOG_SCALE = 1.5; // non-blog pages get larger feathers
   function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
   function randRange(a, b) { return a + Math.random() * (b - a); }
   function isDesktop() { return window.innerWidth > BREAKPOINT; }
+  function isHome() { return document.body.classList.contains('home'); }
+  function isBlogPost() { return document.body.classList.contains('post'); }
+  function pageScale() { return isBlogPost() ? 1 : NON_BLOG_SCALE; }
+  var MIN_TOP = 4; // px: keep feathers from cropping off the top of the article
 
   // Pick a feather whose image differs from the previous two, so no image
   // repeats within any run of three.
@@ -83,7 +89,7 @@
     heading.classList.add('has-feather');
     var choice = pickFeather();
     var len = randRange(CONFIG[choice.bucket].size[0], CONFIG[choice.bucket].size[1])
-      * DESKTOP_SCALE * ROOT_REM;
+      * DESKTOP_SCALE * pageScale() * ROOT_REM;
     var angle = randRange(DESKTOP_ANGLE[0], DESKTOP_ANGLE[1]);
 
     var img = makeImg(choice.bucket, choice.src);
@@ -98,10 +104,22 @@
       if (!r) return;
       var rad = angle * Math.PI / 180;
       var bboxW = Math.abs(r.w * Math.cos(rad)) + Math.abs(r.h * Math.sin(rad));
+      var bboxH = Math.abs(r.w * Math.sin(rad)) + Math.abs(r.h * Math.cos(rad));
       // Sit the whole rotated box in the left margin, right edge just before
       // the heading's left edge (x = 0).
       var gap = MARGIN_GAP_REM * ROOT_REM;
       img.style.left = -(gap + r.w / 2 + bboxW / 2) + 'px';
+
+      // Clamp so the feather never crops off the top of the article.
+      var article = heading.closest('article');
+      var top = heading.offsetHeight / 2; // centred on the heading (with translateY -50%)
+      if (article) {
+        var centerDoc = heading.getBoundingClientRect().top + window.scrollY + heading.offsetHeight / 2;
+        var articleTopDoc = article.getBoundingClientRect().top + window.scrollY;
+        var overshoot = (articleTopDoc + MIN_TOP) - (centerDoc - bboxH / 2);
+        if (overshoot > 0) top += overshoot;
+      }
+      img.style.top = top + 'px';
     }
     img.addEventListener('load', place);
     heading.appendChild(img);
@@ -111,7 +129,7 @@
   // ---- Mobile: one centred feather on its own line ------------------------
   function mobileBlock() {
     var choice = pickFeather();
-    var len = randRange(CONFIG[choice.bucket].size[0], CONFIG[choice.bucket].size[1]) * ROOT_REM;
+    var len = randRange(CONFIG[choice.bucket].size[0], CONFIG[choice.bucket].size[1]) * pageScale() * ROOT_REM;
     var angle = pickMobileAngle();
 
     var block = document.createElement('div');
@@ -135,6 +153,59 @@
     return block;
   }
 
+  // ---- Homepage: feathers scattered in the margins ------------------------
+  // On wide displays, 4-5 feathers spread down both the left and right
+  // margins; on narrower desktops, fewer and only on the left.
+  function scatterFeather(article, side, band, count) {
+    var choice = pickFeather();
+    var len = randRange(CONFIG[choice.bucket].size[0], CONFIG[choice.bucket].size[1])
+      * DESKTOP_SCALE * pageScale() * ROOT_REM;
+    var angle = randRange(DESKTOP_ANGLE[0], DESKTOP_ANGLE[1]);
+
+    var img = makeImg(choice.bucket, choice.src);
+    img.style.maxWidth = len + 'px';
+    img.style.maxHeight = len + 'px';
+    img.style.transformOrigin = 'center center';
+    img.style.transform = 'rotate(' + angle + 'deg)';
+
+    function place() {
+      var r = rendered(img, len);
+      if (!r) return;
+      var rad = angle * Math.PI / 180;
+      var bboxW = Math.abs(r.w * Math.cos(rad)) + Math.abs(r.h * Math.sin(rad));
+      var bboxH = Math.abs(r.w * Math.sin(rad)) + Math.abs(r.h * Math.cos(rad));
+      var W = article.clientWidth, H = article.offsetHeight;
+      var gap = MARGIN_GAP_REM * ROOT_REM;
+
+      // Horizontal: left margin uses negative x; right margin uses the empty
+      // space to the right of the 55% text column.
+      var cx = side === 'left'
+        ? -(gap + bboxW / 2)
+        : W * 0.55 + gap + bboxW / 2;
+      img.style.left = (cx - r.w / 2) + 'px';
+
+      // Vertical: one feather per band, spread down the article, kept fully
+      // inside it (so never cropped top or bottom).
+      var cy = (band + 0.5) / count * H;
+      cy = Math.min(Math.max(cy, MIN_TOP + bboxH / 2), H - bboxH / 2);
+      img.style.top = (cy - r.h / 2) + 'px';
+    }
+    img.addEventListener('load', place);
+    article.appendChild(img);
+    place();
+  }
+
+  function scatterHome(article) {
+    article.classList.add('has-feather');
+    // Right margin is used on any desktop (non-mobile) view; an extra
+    // left-margin feather is added on very wide screens.
+    var leftCount = window.innerWidth > XL ? 3 : 2;
+    var rightCount = 2;
+    var i;
+    for (i = 0; i < leftCount; i++) scatterFeather(article, 'left', i, leftCount);
+    for (i = 0; i < rightCount; i++) scatterFeather(article, 'right', i, rightCount);
+  }
+
   // ---- Build / teardown ---------------------------------------------------
   function teardown() {
     document.querySelectorAll('.heading-feather').forEach(function (el) { el.remove(); });
@@ -143,22 +214,28 @@
   }
 
   function build() {
+    // Signature captures everything that changes the layout, so we only
+    // rebuild when it actually changes (e.g. crossing a width threshold).
     var mode = isDesktop() ? 'desktop' : 'mobile';
-    if (mode === builtMode) return;
+    var signature = mode;
+    if (mode === 'desktop' && isHome()) signature = 'home-' + (window.innerWidth > XL ? 'xl' : 'wide');
+    if (signature === builtMode) return;
     teardown();
     recentMobile = [];
     recentSrc = [];
     var article = document.querySelector('article');
     if (!article) return;
 
-    if (mode === 'desktop') {
-      article.querySelectorAll('h1, h2').forEach(desktopFeather);
-    } else {
+    if (mode === 'mobile') {
       var h1 = article.querySelector('h1');
       if (h1 && h1.parentNode) h1.parentNode.insertBefore(mobileBlock(), h1.nextSibling);
       article.appendChild(mobileBlock());
+    } else if (isHome()) {
+      scatterHome(article);
+    } else {
+      article.querySelectorAll('h1, h2').forEach(desktopFeather);
     }
-    builtMode = mode;
+    builtMode = signature;
   }
 
   if (document.readyState === 'loading') {

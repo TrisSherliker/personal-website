@@ -80,6 +80,8 @@ article h1,
 article h2 { max-width: 55%; }
 
 .has-feather { position: relative; }
+/* Homepage scatters feathers positioned relative to the article. */
+body.home article { position: relative; }
 /* Desktop: feather hangs in the left margin, positioned by JS. */
 .heading-feather {
   position: absolute;
