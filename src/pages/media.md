@@ -3,7 +3,24 @@ title: Media
 subtitle: Publications, press, videos
 permalink: /media/
 ---
-
+<!--
+<div class="media-item">
+ <a href="" target="_blank" rel="noopener">
+  <img class ="media-thumbnail" src="/assets/media/..." alt="">
+ </a>
+ <div class="media-meta">Title, dd Month yyyy</div>
+ <h3>heading</h3>
+ <p class="media-description"> </p>
+</div>
+-->
+<div class="media-item">
+ <a href="https://gigazine.net/news/20260709-uniqlo-akamai-t-shirts-script/" target="_blank" rel="noopener">
+  <img class ="media-thumbnail" src="/assets/media/gigazine.png" alt="">
+ </a>
+ <div class="media-meta">Gigazine, 9 July 2026</div>
+ <h3>Gigazine</h3>
+ <p class="media-description">A report on this blog, following the article in question's appearance at the top of HN for several hours.</p>
+</div>
 
 <div class="media-item">
   <a href="https://hackaday.com/2026/06/24/floss-weekly-episode-872-im-not-satoshi/" target="_blank" rel="noopener">
