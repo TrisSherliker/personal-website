@@ -1,0 +1,172 @@
+/* Handwriting posts: words are SVG ink, sized like type so they reflow like type.
+ *
+ * The ink is inline SVG rather than <img> so CSS can reach inside it. That is what
+ * makes colour and weight tunable; an <img> would be opaque to styling. Each word is
+ * an inline-block sized from one scale factor, so a line wraps at word boundaries
+ * exactly as text does.
+ *
+ * Tunables, all settable on .handwriting or anything above it:
+ *   --hw-scale    overall size, in rem per em of ink                 (default 2)
+ *   --hw-ink      ink colour                                         (default #111)
+ *   --hw-paper    background, used to thin strokes                   (default #fffff8)
+ *   --hw-space    space between words, as a share of the ink size    (default 0.2)
+ *   --hw-local    a local size multiplier, for a lead sentence       (default 1)
+ *   --hw-leading  line pitch, as a multiple of the word height       (fixed 1.2)
+ *
+ * Every measurement is rem x scale rather than em. Sizing off the inherited font-size
+ * meant the word boxes set the line box themselves, so the line-space control did
+ * nothing until it exceeded the height of a word -- and the size control only appeared
+ * to move the spaces.
+ */
+
+.handwriting {
+  --hw-scale: 2;
+  --hw-ink: #111;
+  --hw-paper: #fffff8;
+  --hw-space: 0.2;
+  --hw-leading: 1.2;
+  --hw-local: 1;
+  /* default weight, matching the slider, so it looks right before JS runs */
+  --hw-stroke-width: 10;
+  --hw-stroke-colour: currentColor;
+  --hw-paint-order: stroke fill;
+
+  /* one word's full height, in rem */
+  --hw-unit: calc(var(--hw-height, 1.96) * var(--hw-scale) * var(--hw-local) * 1rem);
+
+  /* Match the column the rest of the page uses. tufte-css scopes its width rule to
+   * section > p, and these paragraphs sit one level deeper inside this container, so
+   * the width is restated here rather than inherited. */
+  width: 55%;
+  margin-right: 40px;
+
+  line-height: calc(var(--hw-leading) * var(--hw-unit));
+  word-spacing: calc(var(--hw-space) * var(--hw-scale) * 1rem);
+}
+
+@media (max-width: 760px) {
+  .handwriting { width: 100%; margin-right: 0; }
+}
+
+.handwriting p { margin: 0 0 0.9em; width: 100%; }
+
+/* A lead sentence, set larger than the rest. Multiplies the current scale
+ * rather than replacing it, so the size slider still governs the whole post. */
+.handwriting .hw-lead { --hw-local: 1.5; }
+
+.handwriting .hw-w {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  width: calc(var(--hw-adv) * var(--hw-scale) * var(--hw-local) * 1rem);
+  height: var(--hw-unit);
+  vertical-align: calc(var(--hw-baseline, -0.74) * var(--hw-scale) * var(--hw-local) * 1rem);
+  word-spacing: normal;
+}
+
+.handwriting .hw-w svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--hw-ink);
+  overflow: visible;
+}
+
+/* Positive weight paints a stroke of ink around the fill, growing the mark. Negative
+ * paints one of paper over its edge, shrinking it -- which works because the page has
+ * a flat background. Potrace ink is a filled outline, so there is no centreline to
+ * widen and this is the only handle available. */
+.handwriting .hw-w svg path,
+.handwriting .hw-w svg polyline {
+  fill: currentColor;
+  stroke: var(--hw-stroke-colour, currentColor);
+  stroke-width: var(--hw-stroke-width, 0);
+  stroke-linejoin: round;
+  paint-order: var(--hw-paint-order, stroke fill);
+}
+
+/* The real word, kept for selection, search and screen readers; hidden visually
+ * rather than removed. */
+.handwriting .hw-t {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* A word holds its space before its ink arrives, so nothing jumps as SVGs load. */
+.handwriting .hw-w:not(.hw-ready) svg { visibility: hidden; }
+
+/* Typed view: the transcription as ordinary type. */
+.handwriting.hw-typed { word-spacing: normal; line-height: inherit; }
+.handwriting.hw-typed .hw-w {
+  width: auto; height: auto; vertical-align: baseline;
+}
+.handwriting.hw-typed .hw-w svg { display: none; }
+.handwriting.hw-typed .hw-t {
+  position: static; width: auto; height: auto; clip-path: none;
+}
+
+/* ---- controls ---- */
+.hw-controls {
+  width: 55%;
+  margin: 0 40px 1.4rem 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fdfdf7;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 0.5rem 1.1rem;
+  align-items: center;
+}
+@media (max-width: 760px) { .hw-controls { width: 100%; margin-right: 0; } }
+
+.hw-controls > * { min-width: 0; }
+.hw-controls label {
+  display: flex; align-items: center; gap: 0.35rem;
+  min-width: 0; overflow: hidden;
+}
+.hw-controls label > span:first-child {
+  flex: 0 1 auto; opacity: 0.75; white-space: nowrap;
+}
+.hw-controls .hw-step {
+  font: inherit; line-height: 1; padding: 0 .38em; cursor: pointer;
+  border: 1px solid #ccc; border-radius: 3px; background: #fff; opacity: .8;
+}
+.hw-controls .hw-step:hover { opacity: 1; border-color: #888; }
+.hw-controls input[type=range] { flex: 1 1 40px; min-width: 40px; width: 100%; }
+.hw-controls .hw-val {
+  flex: 0 0 2.4em; text-align: right; opacity: 0.55;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+
+.hw-controls button {
+  font: inherit;
+  padding: 0.3em 0.7em;
+  cursor: pointer;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  background: #fff;
+}
+.hw-controls button:hover { border-color: #888; }
+
+.hw-inks { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; min-width: 0; }
+.hw-inks button {
+  width: 1.35rem; height: 1.35rem; padding: 0; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.25);
+}
+.hw-inks button[aria-pressed=true] { outline: 2px solid #333; outline-offset: 2px; }
+
+@media print {
+  .handwriting { --hw-ink: #000; }
+  .hw-controls { display: none; }
+}

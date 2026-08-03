@@ -40,6 +40,16 @@ module.exports = function (eleventyConfig) {
 		eleventyConfig.addPassthroughCopy('src/assets')
 		eleventyConfig.addPassthroughCopy('src/uploads')
 
+		// A handwriting post is a directory: index.md beside its own ink/ of word
+		// SVGs. The page is served from /blog/<slug>/ while the source lives in
+		// src/posts/<slug>/, so each ink directory is mapped across to match — the
+		// script fetches them relative to the page. Enumerated here rather than
+		// listed, so a new post needs no config change.
+		require('fs').readdirSync('src/posts', { withFileTypes: true })
+			.filter(d => d.isDirectory() && require('fs').existsSync(`src/posts/${d.name}/ink`))
+			.forEach(d => eleventyConfig.addPassthroughCopy(
+				{ [`src/posts/${d.name}/ink`]: `blog/${d.name}/ink` }))
+
 		// Deep-Merge
 		eleventyConfig.setDataDeepMerge(true)
 
