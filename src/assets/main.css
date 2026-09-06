@@ -135,7 +135,7 @@ blockquote > footer { margin-top: 0; }
 .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 .media-section-heading { margin-top: 2rem; margin-bottom: 1.5rem; }
 
-div.epigraph { margin: 1em 0 2em 0; }
+div.epigraph { margin: 2em 0 3em 0; font-style: italic; font-size: 1.4rem; line-height: 1.6; }
 div.epigraph > blockquote { margin-bottom: 0; padding-bottom: 0; }
 div.epigraph > blockquote > p { margin-bottom: 0; }
 
@@ -161,5 +161,201 @@ div.epigraph > blockquote > p { margin-bottom: 0; }
     border-left: 2px solid #a00000;
     padding-left: 0.8rem;
   }
+
+  /* Pure margin notes (unnumbered): visible by default as inline asides on
+     mobile; the red toggle collapses/re-shows them (inverted logic: checked
+     means hidden, since tufte's default was the invisible-till-toggled one). */
+  .marginnote {
+    display: block;      /* beats tufte's mobile display:none via load order */
+    float: none;         /* undo desktop margin float */
+    width: auto;
+    margin: 1rem 0;      /* includes margin-right: 0 (desktop used -60%) */
+    border-left: 2px solid #a00000;
+    padding-left: .8rem;
+  }
+  .marginnote::before {
+    content: "Sidenote";
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .7rem;
+    font-weight: 600;
+    color: #a00000;
+    margin-bottom: .2rem;
+  }
+  label.margin-toggle:not(.sidenote-number) {
+    color: #a00000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .margin-toggle:checked + .marginnote { display: none; }
+
+  /* Don't upscale small note images to full column width: undo tufte's
+     mobile img{width:100%} inside notes, keep natural size (capped). */
+  .sidenote img, .marginnote img {
+    width: auto;
+    max-width: 100%;
+  }
 }
 div.epigraph > blockquote > footer { margin-top: 0; text-align: right; font-style: normal; }
+
+/* Center images: figure images at natural size, and plain ![]() markdown
+   images (which the parser wraps in a bare <p>). On mobile tufte-css already
+   stretches img to width:100%, so centering is a desktop concern. */
+figure img { display: block; margin: 0 auto; }
+p:has(> img:only-child) { text-align: center; }
+
+/* Tufte-css floats figcaptions into the right gutter, which misaligns them
+   under centered natural-size images. Center the caption under the image
+   instead (shrink-wrapped, capped at figure width). */
+figure figcaption,
+figure.fullwidth figcaption {
+  float: none;
+  width: fit-content;
+  max-width: 100%;
+  margin: .6rem auto 0;
+  text-align: center;
+}
+
+/* Sidenote/margin-note images: tidy block below the note text, no tufte
+   link-underline artifacts on linked images */
+.sidenote img, .marginnote img { display: block; margin-top: .3rem; }
+.sidenote a:has(> img), .marginnote a:has(> img) { background: none; text-shadow: none; cursor: zoom-in; }
+
+/* CSS-only lightbox: the note image links to #<id>, a hidden overlay with
+   that id; :target shows it. The overlay is itself a link to a nonexistent
+   fragment, so clicking anywhere closes it. */
+.lightbox {
+  display: none;
+  position: fixed; inset: 0; z-index: 99;
+  padding: 4vmin;
+  background: rgba(0,0,0,.75);
+  cursor: zoom-out;
+}
+.lightbox:target { display: flex; align-items: center; justify-content: center; }
+.lightbox img { max-width: 100%; max-height: 100%; }
+
+/* Margin figures: captioned figures floated into the right margin (tufte-css
+   styles .marginnote spans but has no figure.marginfigure). On mobile they
+   fall back to ordinary centered in-flow figures. */
+figure.marginfigure {
+  float: right; clear: right;
+  width: 50%;
+  margin: .3rem -60% 1rem 0;
+  position: relative;
+}
+@media (max-width: 760px) {
+  figure.marginfigure { float: none; width: 90%; margin: 1rem auto; }
+}
+
+/* Transcripts shortening for AI prime legs post */
+.ai-exchange {
+  margin: 2rem 0;
+  border: 1px solid rgba(127,127,127,.25);
+  border-radius: 10px;
+  padding: 1rem;
+  width: calc(55% * 0.7); /* 70% of the tufte text column (which is 55% of the article) */
+  box-sizing: border-box; /* keep padding/border inside the 55% */
+  display: flex;          /* visual reorder only — DOM order must stay */
+  flex-direction: column; /* for the :checked ~ sibling selectors       */
+}
+@media (max-width: 760px) {
+  .ai-exchange { width: 100%; } /* mirror tufte's mobile p width */
+}
+.ai-exchange-title { font-weight: 600; margin: 0 0 .5rem; }
+
+.ai-tab, .ai-expand { position: absolute; opacity: 0; pointer-events: none; }
+
+/* Slider switch: one track, knob slides to the checked side */
+.ai-tabbar {
+  position: relative;
+  display: inline-flex;
+  align-self: flex-start;
+  width: 15rem;
+  padding: 2px;
+  margin-bottom: .5rem;
+  border-radius: 999px;
+  background: rgba(127,127,127,.15);
+  user-select: none;
+}
+.ai-tabbar::before { /* the sliding knob */
+  content: ""; position: absolute; top: 2px; bottom: 2px; left: 2px;
+  width: calc(50% - 2px); border-radius: 999px;
+  background: var(--bg-color, #fff);
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  transition: left .18s ease;
+}
+.ai-tab--txt:checked ~ .ai-tabbar::before { left: 50%; }
+.ai-tablabel {
+  position: relative; z-index: 1; /* sit above the knob */
+  flex: 1; text-align: center;
+  cursor: pointer; font-size: .8rem; padding: .3rem 0;
+}
+.ai-tab--img:checked ~ .ai-tabbar .ai-tablabel--img,
+.ai-tab--txt:checked ~ .ai-tabbar .ai-tablabel--txt { font-weight: 600; }
+
+.ai-panel {
+  display: none;
+  position: relative;
+  max-height: 340px;
+  overflow: hidden;
+  order: 2; /* panels after the expand toggle */
+}
+.ai-exchange--solo .ai-panel { display: block; } /* only one panel exists, always show it */
+
+.ai-tab--img:checked ~ .ai-panel--img,
+.ai-tab--txt:checked ~ .ai-panel--txt {
+  display: block;
+}
+
+.ai-panel--img img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 120vh; /* cap tall screenshots: thinner, less zoomed */
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.ai-panel--txt pre {
+  font-family: inherit;   /* ET Book, same as body prose — dark card, not console */
+  font-size: calc(1em + 1pt); /* exactly 1pt above body text */
+  line-height: 1.45;
+  white-space: pre-wrap;  /* keep the transcript's own line breaks */
+  overflow-wrap: break-word;
+  background: #262521;
+  color: #e8e6df;
+  padding: .6rem .9rem;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.ai-panel::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 70px;
+  background: linear-gradient(to bottom, transparent, var(--bg-color, #fff));
+}
+.ai-panel--txt::after { /* fade must match the dark card, not the page */
+  background: linear-gradient(to bottom, transparent, #262521);
+}
+.ai-expand:checked ~ .ai-panel { max-height: none; overflow: visible; }
+.ai-expand:checked ~ .ai-panel::after { display: none; }
+
+/* Teaser crop for tall screenshots: shown collapsed, swapped for the
+   full (linked) screenshot on expand. Panels without a teaser keep the
+   top-slice clip above. */
+.ai-panel--hasteaser { max-height: none; overflow: visible; }
+.ai-panel--hasteaser::after { display: none; }
+.ai-panel--hasteaser .ai-img-full { display: none; }
+.ai-expand:checked ~ .ai-panel--hasteaser .ai-img-teaser { display: none; }
+.ai-expand:checked ~ .ai-panel--hasteaser .ai-img-full { display: block; }
+
+.ai-expand-label {
+  align-self: flex-start;
+  cursor: pointer;
+  font-size: .8rem; color: #5588ff;
+}
+.ai-expand-label--top    { order: 1; margin: 0 0 .5rem; } /* below the slider, above panels */
+.ai-expand-label--bottom { order: 3; margin: .5rem 0 0; } /* after panels */
+.ai-expand-label .show-less { display: none; }
+.ai-expand:checked ~ .ai-expand-label .show-more { display: none; }
+.ai-expand:checked ~ .ai-expand-label .show-less { display: inline; }
