@@ -207,10 +207,13 @@ p:has(> img:only-child) { text-align: center; }
 
 /* Tufte-css floats figcaptions into the right gutter, which misaligns them
    under centered natural-size images. Center the caption under the image
-   instead (shrink-wrapped, capped at figure width). */
+   instead (shrink-wrapped, capped at figure width). clear:none is essential:
+   tufte's figcaption has clear:right, which drops the caption below any
+   right-floating margin note near the figure. */
 figure figcaption,
 figure.fullwidth figcaption {
   float: none;
+  clear: none;
   width: fit-content;
   max-width: 100%;
   margin: .6rem auto 0;

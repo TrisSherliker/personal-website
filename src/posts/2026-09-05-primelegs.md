@@ -3,7 +3,7 @@ title: "What animal has a prime number of legs?"
 date: "2026-09-06"
 ---
 
-<div class="epigraph">An idle question that did interesting things to AI</div>
+<div class="epigraph">..and why on Earth do so many LLMs think the answer is 'a spider?!'</div>
 
 <span class="newthought">What animal</span> has a prime number of legs? The best answer is **"a human"**.[^biped] The riddle sounds easy and intuitive, but it's counterintuitive at least because 
 
