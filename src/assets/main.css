@@ -1,3 +1,8 @@
+/* Main body text: 14pt (tufte-css default is 1.4rem ≈ 15.75pt) */
+ol, p, ul, blockquote {
+  font-size: 14pt;
+}
+
 .fab, .fas {
   font-family: fontawesome !important;
   font-size: 1.2em;
