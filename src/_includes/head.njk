@@ -1,6 +1,10 @@
 <!-- Required meta tags -->
-{% set metaTitle = page.title or meta.title %}
-{% set metaDescription = page.subtitle or meta.subtitle %}
+{% if title and title != meta.title %}
+  {% set metaTitle = title ~ " | " ~ meta.title %}
+{% else %}
+  {% set metaTitle = meta.title %}
+{% endif %}
+{% set metaDescription = subtitle or meta.subtitle %}
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
