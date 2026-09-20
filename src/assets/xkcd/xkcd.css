@@ -1,0 +1,86 @@
+/* xkcd panel — the xkcd.com comic-panel look, inside the tufte page.
+   Scoped under #xkcdPanel so it can't clobber site styles. */
+
+#xkcdPanel {
+	background: #96A8C8;
+	border: 1.5px solid #071419;
+	border-radius: 12px;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+	padding: 10px;
+	margin: 1.2em 0;
+	max-width: 820px;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+#xkcdPanel .xkcd-box {
+	background: #FCFCFC;
+	border: 1.5px solid #071419;
+	border-radius: 12px;
+	padding: 8px 10px 12px;
+}
+
+#xkcdPanel #middleContainer {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#xkcdPanel .comicNav {
+	list-style: none;
+	padding: 0;
+	margin: 8px 0;
+	width: auto;
+}
+
+#xkcdPanel .comicNav li {
+	display: inline-block;
+	margin: 0 3px;
+}
+
+#xkcdPanel .comicNav a {
+	display: inline-block;
+	min-width: 54px;
+	padding: 3px 8px;
+	border: 1.5px solid #333;
+	border-radius: 3px;
+	background: #E5E5E5;
+	color: #333;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#xkcdPanel .comicNav a:hover {
+	background: #FFF;
+}
+
+#xkcdPanel .comicNav a.disabled {
+	opacity: 0.35;
+	pointer-events: none;
+}
+
+#xkcdPanel #ctitle {
+	font-size: 21px;
+	font-weight: bold;
+	margin: 10px 0 6px;
+}
+
+#xkcdPanel #comic img {
+	max-width: 100%;
+}
+
+#xkcdPanel #ttext {
+	font-size: 13px;
+	color: #666;
+	margin: 6px 0 2px;
+}
+
+#xkcdPanel #bottom {
+	font-size: 13px;
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+#xkcdPanel #bottom a {
+	color: #2E4E6E;
+}
