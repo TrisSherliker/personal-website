@@ -126,6 +126,13 @@ h3 { margin-top: 1rem; }
 blockquote > p { margin-bottom: 0.2rem; }
 blockquote > footer { margin-top: 0; }
 
+article blockquote {
+  margin-left: 1.5em;
+  font-size: 13pt;
+  font-style: italic;
+}
+article blockquote > p { font-size: inherit; font-style: inherit; line-height: 2rem; }
+
 .media-item { margin-bottom: 3rem; display: flex; flex-direction: column; }
 .media-item .media-meta { order: 1; color: #888; font-size: 0.85rem; margin-bottom: 0.3rem; }
 .media-item h3 { order: 2; margin-top: 0.2rem; margin-bottom: 0.8rem; font-size: 2.2rem; font-style: italic; font-weight: 400; line-height: 1.05; }
@@ -228,6 +235,7 @@ figure.fullwidth figcaption {
 /* Sidenote/margin-note images: tidy block below the note text, no tufte
    link-underline artifacts on linked images */
 .sidenote img, .marginnote img { display: block; margin-top: .3rem; }
+.marginnote img[alt="Bates numbering example"] { width: 150px; }
 .sidenote a:has(> img), .marginnote a:has(> img) { background: none; text-shadow: none; cursor: zoom-in; }
 
 /* CSS-only lightbox: the note image links to #<id>, a hidden overlay with

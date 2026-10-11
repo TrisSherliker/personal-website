@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" role="img" aria-labelledby="title desc">
+<title id="title">Cumulative BunTool uses over time</title>
+<desc id="desc">Cumulative daily bundle creation dates from 2026-03-07 through 2026-10-11, with an opening offset of 2,800 uses for activity before logging began. Total: 22,243 uses.</desc>
+<style>text{font-family:system-ui,sans-serif;fill:#222}.grid{stroke:#ddd;stroke-width:1}.axis{stroke:#555;stroke-width:1.2}.line{fill:none;stroke:#c0392b;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.tick{font-size:13px}.title{font-size:23px;font-weight:600}.subtitle{font-size:14px;fill:#555}.xlabel{font-size:14px}</style>
+<rect width="100%" height="100%" fill="#fff"/>
+<text class="title" x="90" y="30">Cumulative BunTool uses</text>
+<text class="subtitle" x="90" y="49">22,243 uses, including +2,800 pre-log offset · 2026-03-07 to 2026-10-11</text>
+<line class="grid" x1="90" y1="530.0" x2="1065" y2="530.0"/>
+<text class="tick" x="78" y="534.0" text-anchor="end">0</text>
+<line class="grid" x1="90" y1="450.0" x2="1065" y2="450.0"/>
+<text class="tick" x="78" y="454.0" text-anchor="end">3,708</text>
+<line class="grid" x1="90" y1="370.0" x2="1065" y2="370.0"/>
+<text class="tick" x="78" y="374.0" text-anchor="end">7,416</text>
+<line class="grid" x1="90" y1="290.0" x2="1065" y2="290.0"/>
+<text class="tick" x="78" y="294.0" text-anchor="end">11,124</text>
+<line class="grid" x1="90" y1="210.0" x2="1065" y2="210.0"/>
+<text class="tick" x="78" y="214.0" text-anchor="end">14,832</text>
+<line class="grid" x1="90" y1="130.0" x2="1065" y2="130.0"/>
+<text class="tick" x="78" y="134.0" text-anchor="end">18,540</text>
+<line class="grid" x1="90" y1="50.0" x2="1065" y2="50.0"/>
+<text class="tick" x="78" y="54.0" text-anchor="end">22,248</text>
+<line class="axis" x1="90" y1="50" x2="90" y2="530"/>
+<line class="axis" x1="90" y1="530" x2="1065" y2="530"/>
+<path class="line" d="M90.0,469.5 L94.5,469.2 L98.9,468.6 L103.4,467.9 L107.9,467.8 L112.4,465.9 L116.8,465.5 L121.3,465.4 L125.8,465.1 L130.3,464.3 L134.7,462.0 L139.2,461.2 L143.7,459.9 L148.1,459.2 L152.6,458.3 L157.1,457.7 L161.6,457.1 L166.0,455.8 L170.5,455.0 L175.0,454.3 L179.4,453.5 L183.9,452.8 L188.4,452.3 L192.9,451.2 L197.3,450.3 L201.8,449.9 L206.3,449.2 L210.8,449.1 L215.2,448.5 L219.7,448.2 L224.2,447.1 L228.6,446.0 L233.1,444.6 L237.6,443.9 L242.1,441.5 L246.5,441.1 L251.0,440.2 L255.5,438.5 L260.0,436.1 L264.4,435.2 L268.9,433.6 L273.4,432.9 L277.8,432.4 L282.3,431.4 L286.8,424.3 L291.3,418.0 L295.7,413.1 L300.2,408.9 L304.7,403.8 L309.2,401.9 L313.6,400.7 L318.1,396.7 L322.6,394.0 L327.0,390.6 L331.5,387.2 L336.0,384.4 L340.5,383.6 L344.9,382.9 L349.4,380.7 L353.9,377.6 L358.3,374.9 L362.8,372.4 L367.3,369.7 L371.8,368.5 L376.2,366.0 L380.7,363.0 L385.2,358.7 L389.7,355.5 L394.1,353.0 L398.6,351.2 L403.1,350.2 L407.5,349.1 L412.0,347.3 L416.5,344.7 L421.0,342.6 L425.4,339.8 L429.9,338.2 L434.4,337.8 L438.9,336.8 L443.3,335.7 L447.8,333.1 L452.3,331.0 L456.7,327.3 L461.2,324.8 L465.7,323.9 L470.2,322.5 L474.6,319.0 L479.1,315.3 L483.6,313.1 L488.1,311.5 L492.5,308.7 L497.0,308.6 L510.4,306.9 L514.9,303.9 L519.4,301.3 L523.8,298.8 L528.3,298.1 L532.8,297.2 L537.2,293.3 L541.7,289.4 L546.2,286.8 L550.7,282.3 L555.1,280.0 L559.6,279.3 L564.1,278.2 L568.6,275.0 L573.0,272.5 L577.5,270.7 L582.0,268.7 L586.4,267.1 L590.9,266.1 L595.4,264.8 L599.9,261.6 L604.3,259.3 L608.8,256.5 L613.3,253.3 L617.8,251.5 L622.2,250.5 L626.7,249.0 L631.2,246.2 L635.6,244.5 L640.1,241.3 L644.6,238.2 L649.1,235.7 L653.5,234.9 L658.0,233.1 L662.5,229.3 L666.9,226.4 L671.4,223.7 L675.9,220.9 L680.4,218.2 L684.8,217.1 L689.3,215.7 L693.8,212.7 L698.3,210.9 L702.7,208.9 L707.2,207.1 L711.7,205.2 L716.1,204.4 L720.6,203.6 L725.1,201.7 L729.6,198.8 L734.0,195.1 L738.5,192.7 L743.0,191.0 L747.5,190.5 L751.9,189.6 L756.4,185.9 L760.9,183.9 L765.3,181.2 L769.8,178.5 L774.3,176.9 L778.8,176.1 L783.2,175.0 L787.7,172.5 L792.2,170.0 L796.7,167.5 L801.1,165.3 L805.6,163.2 L810.1,162.4 L814.5,161.6 L819.0,159.6 L823.5,157.6 L828.0,155.2 L832.4,152.5 L836.9,150.4 L841.4,149.7 L845.8,148.2 L850.3,145.6 L854.8,143.1 L859.3,141.4 L863.7,137.5 L868.2,135.0 L872.7,134.0 L877.2,133.1 L881.6,131.9 L886.1,126.6 L890.6,124.1 L895.0,121.7 L899.5,120.0 L904.0,119.5 L908.5,118.8 L912.9,117.0 L917.4,114.3 L921.9,112.2 L926.4,110.4 L930.8,108.6 L935.3,107.7 L939.8,107.2 L944.2,105.0 L948.7,102.1 L953.2,99.8 L957.7,97.4 L962.1,95.3 L966.6,94.8 L971.1,93.6 L975.6,91.0 L980.0,88.6 L984.5,85.8 L989.0,83.1 L993.4,80.8 L997.9,80.2 L1002.4,79.3 L1006.9,76.2 L1011.3,72.8 L1015.8,70.6 L1020.3,68.3 L1024.7,66.4 L1029.2,65.7 L1033.7,64.6 L1038.2,61.3 L1042.6,58.0 L1047.1,55.2 L1051.6,52.5 L1056.1,51.0 L1060.5,50.1 L1065.0,50.1"/>
+<line class="grid" x1="201.8" y1="530" x2="201.8" y2="535"/>
+<text class="tick" x="201.8" y="557" text-anchor="middle">Apr 2026</text>
+<line class="grid" x1="336.0" y1="530" x2="336.0" y2="535"/>
+<text class="tick" x="336.0" y="557" text-anchor="middle">May 2026</text>
+<line class="grid" x1="474.6" y1="530" x2="474.6" y2="535"/>
+<text class="tick" x="474.6" y="557" text-anchor="middle">Jun 2026</text>
+<line class="grid" x1="608.8" y1="530" x2="608.8" y2="535"/>
+<text class="tick" x="608.8" y="557" text-anchor="middle">Jul 2026</text>
+<line class="grid" x1="747.5" y1="530" x2="747.5" y2="535"/>
+<text class="tick" x="747.5" y="557" text-anchor="middle">Aug 2026</text>
+<line class="grid" x1="886.1" y1="530" x2="886.1" y2="535"/>
+<text class="tick" x="886.1" y="557" text-anchor="middle">Sep 2026</text>
+<line class="grid" x1="1020.3" y1="530" x2="1020.3" y2="535"/>
+<text class="tick" x="1020.3" y="557" text-anchor="middle">Oct 2026</text>
+<text class="xlabel" x="577.5" y="602" text-anchor="middle">Date (daily counts accumulated)</text>
+</svg>

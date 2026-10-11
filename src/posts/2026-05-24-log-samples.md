@@ -24,6 +24,6 @@ As you see, it's technical logging only without any personal info. Having posted
 
 That's about it. The error codes (here labelled "Status") can vary - for example there was an increasing trend of errors where people were creating larger and larger bundles which showed up as `realloc error (8765432 bytes failed)` and reference a line of the code where the problem arose[^stack].
 
-[^stack]: The "stack trace"
+[^stack]: {-} The "stack trace"
 
 But still, no personal information.

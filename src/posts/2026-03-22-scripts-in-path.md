@@ -11,7 +11,7 @@ tags: [Linux, scripts, shell]
 
 Instead of using aliases in `bashrc` (or in my case usually `config.fish`) for execution, Evan recommends adding basic scripts to a directory. You can then put that directory in your PATH [^path] and have the script execute right from your shell, while the directory is version controlled. 
 
-[^path]: The $PATH is the list of places where your system looks to find commands it's being executed. This is different to the common (lowercase) 'file path' showing where a file is found.
+[^path]: {-} The $PATH is the list of places where your system looks to find commands it's being executed. This is different to the common (lowercase) 'file path' showing where a file is found.
 
 The effect is like a personal multitool that's ready whenever you need it. Maybe obvious in hindsight but quite powerful in practice. [Julia Evans also explains](https://jvns.ca/blog/2025/02/13/how-to-add-a-directory-to-your-path/) how to do this in a very clear way, covering lots of different cases.
 
@@ -27,7 +27,7 @@ I use fish shell (because it [just works](https://shkspr.mobi/blog/2021/06/what-
 
 The (realpath ...) function in the snippet above will be replaced by the full directory path. That will then be added to the PATH.
 
-[^warn]: Although Julia Evans [warns against this](https://jvns.ca/blog/2025/02/13/how-to-add-a-directory-to-your-path/#a-note-on-fish-add-path) for a couple of reasons, including that it's hard to undo.
+[^warn]: {-} Although Julia Evans [warns against this](https://jvns.ca/blog/2025/02/13/how-to-add-a-directory-to-your-path/#a-note-on-fish-add-path) for a couple of reasons, including that it's hard to undo.
 
 ## 'Symlinks' is always the answer
 
@@ -59,6 +59,6 @@ All that remains is to add the scripts themselves to the subdirectory. Rather th
 ln -s (realpath ./scripts/myscript.sh) ./script-path/myscript
 ```
 
-[^bulk]: The first time, I did it in bulk. All my existing scripts were named with a .sh extension so in fish: `~> for sh_file in *.sh; set filename_without_extension (string split -r -m1 . $sh_file); ln -s (realpath $sh_file) ./script-path/$filename_without_extension; end`
+[^bulk]: {-} The first time, I did it in bulk. All my existing scripts were named with a .sh extension so in fish: `~> for sh_file in *.sh; set filename_without_extension (string split -r -m1 . $sh_file); ln -s (realpath $sh_file) ./script-path/$filename_without_extension; end`
 
 And don't forget to give all the script files executable permission with `chmod +x filename.sh`.

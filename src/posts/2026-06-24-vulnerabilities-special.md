@@ -9,7 +9,7 @@ But I think I disagree with his premise. To my mind, vulnerability reports *are*
 
 To be clear, I don't claim to know better than Filippo: he is immersed in that world! I'm a lawyer who handles security through a very different lens, so I am only dealing with this from a high level, damage-limitation-after-the-event sort of perspective. I also don't want to downplay how serious it can be to suffer the information overload of AI-generated materials  coming thick and fast but taking disproportionate time to verify.[^prob]
 
-[^prob]: But dealing with hard-to-verify overload is a problem where I think lawyers and software engineers do have a similar experience.
+[^prob]: {-} But dealing with hard-to-verify overload is a problem where I think lawyers and software engineers do have a similar experience.
 
 Anyway with those caveats, I had the reaction I had for three reasons: 
 
@@ -32,7 +32,7 @@ If someone has found your vulnerability, others will be able to find it too. Ass
 
 Filippo makes the point that these things will be triaged and the triage would probably catch the vulnerability anyway. And that's a good point! But not all tooling is equal, and even with access to the best tools any given project's triage might just be wrong, or not take account of everything known to the researcher or attacker. So the triage might need to adapt. [^agree]
 
-[^agree]: ultimately if this research was on the `#TODO` list anyway, that's probably a signal that everyone agrees it's worth addressing. 
+[^agree]: {-} ultimately if this research was on the `#TODO` list anyway, that's probably a signal that everyone agrees it's worth addressing. 
 
 ## 3: Abuse is also more accessible than ever
 

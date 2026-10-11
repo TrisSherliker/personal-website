@@ -20,7 +20,7 @@ compatibility for Times New Roman and Arial fonts. That's a great idea because
 some tribunals specify font types[^lockin] and the plumbing for it was mostly
 there in the backend.
 
-[^lockin]: In fact it's a minor access to justice issue that courts require
+[^lockin]: {-} In fact it's a minor access to justice issue that courts require
    people to use proprietary fonts, but probably not a deliberate one. Most people
     seem to think of TNR and Arial as being generic and free, even if that's wrong.
     Fair enough given their prevalence and the hyper-niche nuance of font IP law.
@@ -29,7 +29,7 @@ there in the backend.
 The trouble is that both those fonts are proprietary and BunTool is FOSS. So I
 found two excellent alternatives - respectively, [CharisSIL](https://software.sil.org/charis/) and [Liberation Sans](https://en.wikipedia.org/wiki/Liberation_fonts).[^whynot] So I loaded those in and connected up the plumbing, spun up the test cases and all worked well. 
 
-[^whynot]: Why not Liberation Serif too? Only because I liked Charis. All the
+[^whynot]: {-} Why not Liberation Serif too? Only because I liked Charis. All the
     Liberation fonts are great!
 
 Deploying broke everything. Cloudflare was serving some fonts but not others,

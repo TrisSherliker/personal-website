@@ -7,7 +7,7 @@ tags: [Claude, LLM, BunTool]
 
 <span class="newthought">My side project</span> has been entirely handcoded in the backend, until today. I've used Claude Code a great deal for frontend work -- I am no web designer -- but I've tended my backend carefully with my own hands.[^hands] Today I decided to break that habit and try adding a feature using Claude to generate all the code edits.
 
-[^hands]: In fact using my hands is part of the point, being effective rehab while recovering from an injury.
+[^hands]: {-} In fact using my hands is part of the point, being effective rehab while recovering from an injury.
 
 [BunTool](https://buntool.co.uk) ([git](https://github.com/TrisSherliker/buntool-website-git)) is for making PDF bundles for use in court and legal settings, and one feature requested by a colleague (who absolutely knows what she is talking about and should be listened to) was the ability to add a custom coversheet. That's a great test case, because the feature is easy to conceptualise and express, it touches multiple points in the bundle-making pipeline from frontend to output, and because I can hold the logic in my head from beginning to end for checking purposes.
 
@@ -15,7 +15,7 @@ tags: [Claude, LLM, BunTool]
 
 Also a good chance to test a new (to me) `claude.md` variant. I heard from a friend today that [Forrest Chang's Karpathy-Inspired Claude Code Guidelines](https://github.com/forrestchang/andrej-karpathy-skills) was useful[^forrest], so I installed it as a plugin before I got started. This was pretty easy using claude's inline plugin management commands.
 
-[^forrest]: Described as _"A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."_ I've used Claude enough in the past that I think I'll be able to spot differences, though this is a slightly different exercise.
+[^forrest]: {-} Described as _"A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."_ I've used Claude enough in the past that I think I'll be able to spot differences, though this is a slightly different exercise.
 
 ## Specifying
 
@@ -68,11 +68,11 @@ So I ended up being quite hands-on and I couldn't surrender control entirely. Ha
 <figure><img src="/assets/claude-check.png" alt="I let the LLM have the satisfaction of checking things off its list, and it took the opportunity for some sassy backchat."><figcaption>I let the LLM have the satisfaction of checking things off its list, and it took the opportunity for some sassy backchat.</figcaption></figure>
 
 
-[^sed]: Using `sed` is quite boring. Luckily Claude could also save me all the typing.
+[^sed]: {-} Using `sed` is quite boring. Luckily Claude could also save me all the typing.
 
 <span class="newthought">At one point while testing</span> I found quite a subtle bug with hyperlinking, which took a while to solve because it seemed to be only intermittently reproducible[^bug]. This was very annoying but I eventually worked out that it was due to relying on undefined behaviour being handled in a certain way. This wasn't Claude's fault, but Claude confidently proposed a fix that broke things much more acutely. I fixed it by hand in the end.
 
-[^bug]: a sort of [Heisenbug](https://en.wikipedia.org/wiki/Heisenbug), since trying to debug it with my preferred PDF viewers (which give richer control than a browser viewer) led to a different experience.
+[^bug]: {-} a sort of [Heisenbug](https://en.wikipedia.org/wiki/Heisenbug), since trying to debug it with my preferred PDF viewers (which give richer control than a browser viewer) led to a different experience.
 
 ## Overall?
 
